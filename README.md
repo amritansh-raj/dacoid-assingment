@@ -1,50 +1,87 @@
-# React + TypeScript + Vite
+# Calendar and Event Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern calendar and event management app built with React.js and TypeScript. This app allows users to view a monthly calendar, manage events, and persist data locally for seamless usability.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+### **Core Features**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Calendar View**:
 
-- Configure the top-level `parserOptions` property like this:
+   - Displays a grid layout for the current month.
+   - Supports navigation between months using "Previous" and "Next" buttons.
+   - Highlights the current day and selected day.
+   - Distinguishes weekends from weekdays visually.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+2. **Event Management**:
+
+   - Add events by clicking on any day.
+   - Edit or delete events from a selected day.
+   - Event details include:
+     - Event name
+     - Start and end time
+     - Optional description
+
+3. **Event List**:
+
+   - Displays all events for the selected day in a modal or side panel.
+
+4. **Data Persistence**:
+   - Uses **localStorage** for persisting events across page refreshes.
+
+### **Complex Logic**
+
+- Automatically handles month transitions (e.g., January 31 to February 1).
+- Prevents overlapping events to ensure clarity.
+
+## Getting Started
+
+### **Prerequisites**
+
+- Node.js (v16 or higher recommended)
+- Bun (optional) or npm as your package manager
+
+### **Installation**
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd calendar-event-management-app
+   ```
+
+````
+2. Install dependencies:
+
+Using Bun:
+```bash
+bun install
+````
+
+Using npm:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+3. Start the development server:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Using Bun:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+bun run dev
+```
+
+Using npm:
+
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to:
+
+```bash
+http://localhost:5173
 ```
