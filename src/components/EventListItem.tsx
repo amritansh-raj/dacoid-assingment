@@ -1,3 +1,4 @@
+import { toast } from "@/hooks/use-toast";
 import { colorMap } from "@/lib/constansts";
 import { formatTime } from "@/lib/utils";
 import { Event, useCalendarStore } from "@/store/calendar";
@@ -33,6 +34,11 @@ export function EventListItem({ event, onClose }: EventListItemProps) {
   const handleDelete = () => {
     if (event) {
       deleteEvent(event.id);
+      toast({
+        title: "Event Deleted",
+        description: `Successfully deleted "${event.title}"`,
+        variant: "destructive",
+      });
       onClose();
     }
   };

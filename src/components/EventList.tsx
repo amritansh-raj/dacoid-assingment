@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -26,7 +27,8 @@ export function EventList({ date, isOpen, onClose, onAddNew }: EventListProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Events for {format(date, "MMMM d, yyyy")}</DialogTitle>
+          <DialogTitle>Events for </DialogTitle>
+          <DialogDescription>{format(date, "MMMM d, yyyy")}</DialogDescription>
         </DialogHeader>
         <div className="space-y-4 ">
           {events.length === 0 ? (

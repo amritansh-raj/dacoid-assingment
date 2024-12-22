@@ -1,4 +1,3 @@
-import { formatDateToYYYYMMDD } from "@/lib/utils";
 import { useCalendarStore } from "@/store/calendar";
 import {
   addMonths,
@@ -7,6 +6,7 @@ import {
   format,
   isSameDay,
   isSameMonth,
+  startOfDay,
   startOfMonth,
   subMonths,
 } from "date-fns";
@@ -42,7 +42,7 @@ export function Calendar() {
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
-    const events = getEventsForDate(formatDateToYYYYMMDD(date));
+    const events = getEventsForDate(format(startOfDay(date), "yyyy-MM-dd"));
     if (events.length > 0) {
       setIsEventListOpen(true);
     } else {
@@ -79,7 +79,7 @@ export function Calendar() {
             <div key={`empty-${index}`} />
           ))}
         {days.map((day) => {
-          const formattedDate = format(day, "yyyy-MM-dd");
+          const formattedDate = format(startOfDay(day), "yyyy-MM-dd");
           const events = getEventsForDate(formattedDate);
           const isToday = isSameDay(day, new Date());
           const isSelected = selectedDate && isSameDay(day, selectedDate);
@@ -128,23 +128,23 @@ export function Calendar() {
         })}
       </div>
 
-      {selectedDate && (
-        <>
-          <EventDialog
-            date={selectedDate}
-            isOpen={isEventDialogOpen}
-            onClose={() => setIsEventDialogOpen(false)}
-          />
-          <EventList
-            date={selectedDate}
-            isOpen={isEventListOpen}
-            onClose={() => setIsEventListOpen(false)}
-            onAddNew={() => {
-              setIsEventListOpen(false);
-              setIsEventDialogOpen(true);
-            }}
-          />
-        </>
+      {isEventDialogOpen && selectedDate && (
+        <EventDialog
+          date={selectedDate}
+          isOpen={isEventDialogOpen}
+          onClose={() => setIsEventDialogOpen(false)}
+        />
+      )}
+      {isEventListOpen && selectedDate && (
+        <EventList
+          date={selectedDate}
+          isOpen={isEventListOpen}
+          onClose={() => setIsEventListOpen(false)}
+          onAddNew={() => {
+            setIsEventListOpen(false);
+            setIsEventDialogOpen(true);
+          }}
+        />
       )}
     </div>
   );
